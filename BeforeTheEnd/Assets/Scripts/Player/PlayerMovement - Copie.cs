@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Test : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator animPlayer;
@@ -27,21 +27,19 @@ public class PlayerMovement : MonoBehaviour
         //rb = GetComponent<Rigidbody2D>(); 
         //animPlayer = GetComponent<Animator>();
     }
-    
+
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(inputX * moveSpeed, rb.velocity.y);
-        //print(GetComponent<SpriteRenderer>().sprite.name);
+        print(animPlayer.GetBool("isJumping"));
         isGrounded = Physics2D.OverlapCircle(groundPoint.position, .2f, ground); // magic number whatever
-        
-        //Si l'animation de préparation au saut est complète
+
         if (GetComponent<SpriteRenderer>().sprite.name == "PPsaut0008")
         {
             animPlayer.SetBool("isJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             GetComponent<SFXManager>().PlayJump();
         }
-        //Si le joueur vient d'atterrir
         if (animPlayer.GetBool("isJumping") && rb.velocity.y < 0.01 && isGrounded)
         {
             animPlayer.SetBool("isJumping", false);
@@ -66,7 +64,8 @@ public class PlayerMovement : MonoBehaviour
             srPlayer.flipX = false;
             srOizo.flipX = false;
             animPlayer.SetBool("isWalking", true);
-        } else if (inputX == 0)
+        }
+        else if (inputX == 0)
         {
             animPlayer.SetBool("isWalking", false);
         }

@@ -1471,7 +1471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lePiaf: {fileID: 5090469069572932523}
-  GM: {fileID: 0}
   toggleableObjects: []
 --- !u!1 &4745907690213364750
 GameObject:
