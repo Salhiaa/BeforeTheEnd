@@ -2683,30 +2683,10 @@ MonoBehaviour:
   - 0/Even in this poor state.
   - 1/We will do great
   - 1/That, I can believe.
-  Part1:
-  - "Feels and flows\u2026"
-  - 2/This rhythmic pumping in my chest.
-  - 2/Am I alive again?
-  - 2/Is my blood rushing in my veins?
-  - 2/How can it be? Why did you do so?
-  - 2/I went to sleep for her,
-  - '2/She had to live and laugh. '
-  - "2/But now it\u2019s too late isn't it?"
-  Part2:
-  - "No it\u2019s not ! It will never be. "
-  - We still are here, you and me.
-  Part3:
-  - Even if we are dead?
-  Part4:
-  - 'I am not afraid. '
-  - Together we will live,
-  - Even in this poor state.
-  Part5:
-  - We will do great
-  - That, I can believe.
   speechBox: {fileID: 883064945}
   dial: {fileID: 686394407}
   CrowsWings: {fileID: 1217672636}
+  awakened: 0
 --- !u!212 &1976624233
 SpriteRenderer:
   m_ObjectHideFlags: 0
