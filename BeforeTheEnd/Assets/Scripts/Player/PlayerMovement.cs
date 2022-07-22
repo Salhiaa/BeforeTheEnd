@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float inputX;
     private bool isGrounded;
+    public bool crowRested;
 
     private bool inverted = false;
 
@@ -57,15 +58,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (inputX > 0)
         {
-            animPlayer.SetBool("isWalking", true);
+            animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = true;
-            srOizo.flipX = true;
+            if (crowRested)
+                srOizo.flipX = true;
+            
         }
         else if (inputX < 0)
         {
+            animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = false;
-            srOizo.flipX = false;
-            animPlayer.SetBool("isWalking", true);
+            if (crowRested)
+                srOizo.flipX = false;
         } else if (inputX == 0)
         {
             animPlayer.SetBool("isWalking", false);

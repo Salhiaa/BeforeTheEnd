@@ -1457,6 +1457,9 @@ MonoBehaviour:
   RestPos: {fileID: 7649628451104366100}
   centerCelling: {fileID: 0}
   animCrow: {fileID: 7438781702888008817}
+  srOizo: {fileID: 4745907690125137537}
+  Player: {fileID: 4745907690213364750}
+  PlayerMvt: {fileID: 0}
   wantsToRest: 0
   isUsingVision: 0
   isAtCelling: 0
@@ -1766,6 +1769,7 @@ MonoBehaviour:
     m_Bits: 64
   srPlayer: {fileID: 4745907690213364747}
   srOizo: {fileID: 4745907690125137537}
+  crowRested: 0
 --- !u!114 &8998939329305758955
 MonoBehaviour:
   m_ObjectHideFlags: 0

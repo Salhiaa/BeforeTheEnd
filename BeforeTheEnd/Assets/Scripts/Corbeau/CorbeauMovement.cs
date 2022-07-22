@@ -9,11 +9,21 @@ public class CorbeauMovement : MonoBehaviour
     [SerializeField] Transform centerCelling;
 
     [SerializeField] Animator animCrow;
+    [SerializeField] SpriteRenderer srOizo;
+
+    [SerializeField] GameObject Player;
+    public PlayerMovement PlayerMvt;
 
     public bool wantsToRest = false;
     public bool isUsingVision, isAtCelling;
+    Vector3 highPoint;
 
-    
+    private void Awake()
+    {
+        PlayerMvt = Player.GetComponent<PlayerMovement>();
+        highPoint = centerCelling.position;
+    }
+
 
     private void FixedUpdate()
     {
@@ -27,17 +37,30 @@ public class CorbeauMovement : MonoBehaviour
             isAtCelling = false;
             wantsToRest = false;
             animCrow.SetBool("isFlying", false);
+            PlayerMvt.crowRested = true;
         }
 
         // Va au plafond
-        if (!isAtCelling && isUsingVision && transform.position != centerCelling.position)
+        if (isUsingVision)
         {
-            transform.position = Vector3.MoveTowards(transform.position, centerCelling.position, .15f);
-            animCrow.SetBool("isFlying", true);
-        } else if (isUsingVision && transform.position == centerCelling.position) // Quand est au plafond, arrete de vouloir allez au plafond
-        {
-            isAtCelling = true;
-            transform.SetParent(null);
+            if (transform.position == highPoint) // Quand est au plafond, arrete de vouloir allez au plafond
+            {
+                isAtCelling = true;
+                transform.SetParent(null);
+            } else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, highPoint, .15f);
+                animCrow.SetBool("isFlying", true);
+                PlayerMvt.crowRested = false;
+                if (RestPos.position.x > highPoint.x)
+                {
+                    srOizo.flipX = false;
+                } else
+                {
+                    srOizo.flipX = true;
+                }
+            }
+            
         }
     }
 
@@ -47,6 +70,15 @@ public class CorbeauMovement : MonoBehaviour
         {
             transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
             wantsToRest = true;
+
+            if (RestPos.position.x > highPoint.x)
+            {
+                srOizo.flipX = true;
+            }
+            else
+            {
+                srOizo.flipX = false;
+            }
         }
     }
 }

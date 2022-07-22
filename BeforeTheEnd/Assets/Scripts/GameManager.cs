@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
         Destroy(ItemIcon);
         item = "";
         dancerAwakened = true;
-        print("ARISE !");
+        //print("ARISE !");
     }
 
 
