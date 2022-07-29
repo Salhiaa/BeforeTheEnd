@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Vision",
+                    "name": "CrowVision",
                     "type": "Button",
                     "id": "22a540bb-9f3b-449c-ba83-de6fb07b650e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CrowReach",
+                    "type": "Button",
+                    "id": "44d6b1ca-ad1f-41c5-8e85-d70007de5e74",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -69,7 +78,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "PassTroughFloor",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -121,11 +130,22 @@
                 {
                     "name": "",
                     "id": "401065e4-0173-4587-8c75-d1f5fe464a4b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CrowVision",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f36be9ec-3398-4a09-96ff-78881f59e0db",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Vision",
+                    "action": "CrowReach",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

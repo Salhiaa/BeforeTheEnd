@@ -14,11 +14,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundPoint;
     [SerializeField] LayerMask ground;
 
-    [SerializeField] SpriteRenderer srPlayer, srOizo;
+    [SerializeField] SpriteRenderer srPlayer; //, srOizo;
 
     private float inputX;
     private bool isGrounded;
-    public bool crowRested;
+    //public bool crowRested;
 
     private bool inverted = false;
 
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundPoint.position, .2f, ground); // magic number whatever
         
         //Si l'animation de préparation au saut est complète
-        if (GetComponent<SpriteRenderer>().sprite.name == "PPsaut0008")
+        if (GetComponent<SpriteRenderer>().sprite.name == "PPsaut0008" || GetComponent<SpriteRenderer>().sprite.name == "PPsautWCrow0008")
         {
             animPlayer.SetBool("isJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -60,16 +60,16 @@ public class PlayerMovement : MonoBehaviour
         {
             animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = true;
-            if (crowRested)
-                srOizo.flipX = true;
+            /*if (crowRested)
+                srOizo.flipX = true;*/
             
         }
         else if (inputX < 0)
         {
             animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = false;
-            if (crowRested)
-                srOizo.flipX = false;
+            /*if (crowRested)
+                srOizo.flipX = false;*/
         } else if (inputX == 0)
         {
             animPlayer.SetBool("isWalking", false);
@@ -90,4 +90,18 @@ public class PlayerMovement : MonoBehaviour
         inverted = !inverted;
     }
 
+
+    public void switchAnimationLayer(bool hasCrow)
+    {
+        if (hasCrow)
+        {
+            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Crow Layer"), 1);
+            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Base Layer"), 0);
+        }
+        else
+        {
+            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Crow Layer"), 0);
+            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Base Layer"), 1);
+        }
+    }
 }

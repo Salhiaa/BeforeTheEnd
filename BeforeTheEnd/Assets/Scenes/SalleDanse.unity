@@ -1654,8 +1654,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 926603475}
     - target: {fileID: 4745907690125137537, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745907690125137537, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
       propertyPath: m_SortingOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4745907690125137537, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4745907690213364745, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
       propertyPath: m_Size.x
@@ -1717,6 +1725,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5090469069572932523, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
+      propertyPath: PlayerMvt
+      value: 
+      objectReference: {fileID: 1640109775}
     - target: {fileID: 5090469069572932523, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
       propertyPath: centerCelling
       value: 
@@ -2457,6 +2469,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1640109775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4745907690213364751, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
+  m_PrefabInstance: {fileID: 1389943375}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7fa8dc65ee8b014eb77e4d3595736cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1850785110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,10 +2518,10 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850785110}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

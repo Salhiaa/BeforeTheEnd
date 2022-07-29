@@ -11,7 +11,6 @@ public class CorbeauMovement : MonoBehaviour
     [SerializeField] Animator animCrow;
     [SerializeField] SpriteRenderer srOizo;
 
-    [SerializeField] GameObject Player;
     public PlayerMovement PlayerMvt;
 
     public bool wantsToRest = false;
@@ -20,7 +19,6 @@ public class CorbeauMovement : MonoBehaviour
 
     private void Awake()
     {
-        PlayerMvt = Player.GetComponent<PlayerMovement>();
         highPoint = centerCelling.position;
     }
 
@@ -37,7 +35,7 @@ public class CorbeauMovement : MonoBehaviour
             isAtCelling = false;
             wantsToRest = false;
             animCrow.SetBool("isFlying", false);
-            PlayerMvt.crowRested = true;
+            PlayerMvt.switchAnimationLayer(true);
         }
 
         // Va au plafond
@@ -51,7 +49,7 @@ public class CorbeauMovement : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, highPoint, .15f);
                 animCrow.SetBool("isFlying", true);
-                PlayerMvt.crowRested = false;
+                PlayerMvt.switchAnimationLayer(false);
                 if (RestPos.position.x > highPoint.x)
                 {
                     srOizo.flipX = false;
@@ -62,16 +60,10 @@ public class CorbeauMovement : MonoBehaviour
             }
             
         }
-    }
 
-    public void Rest()
-    {
-        if(transform.position != RestPos.position)
+        if (wantsToRest)
         {
-            transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
-            wantsToRest = true;
-
-            if (RestPos.position.x > highPoint.x)
+            if (RestPos.position.x > transform.position.x)
             {
                 srOizo.flipX = true;
             }
@@ -79,6 +71,15 @@ public class CorbeauMovement : MonoBehaviour
             {
                 srOizo.flipX = false;
             }
+        }
+    }
+
+    public void Rest()
+    {
+        if(transform.position != RestPos.position)
+        {
+            transform.SetParent(PlayerMvt.transform);
+            wantsToRest = true;
         }
     }
 }
