@@ -60,16 +60,12 @@ public class PlayerMovement : MonoBehaviour
         {
             animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = true;
-            /*if (crowRested)
-                srOizo.flipX = true;*/
             
         }
         else if (inputX < 0)
         {
             animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = false;
-            /*if (crowRested)
-                srOizo.flipX = false;*/
         } else if (inputX == 0)
         {
             animPlayer.SetBool("isWalking", false);
@@ -85,12 +81,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Invert controls (level 3 : shore)
     public void invertControls()
     {
         inverted = !inverted;
     }
 
-
+    //Add/remove crow
     public void switchAnimationLayer(bool hasCrow)
     {
         if (hasCrow)

@@ -13,64 +13,50 @@ public class CorbeauMovement : MonoBehaviour
 
     public PlayerMovement PlayerMvt;
 
-    public bool wantsToRest = false;
+    public bool wantsToRest;
     public bool isUsingVision, isAtCelling;
-    Vector3 highPoint;
+    Vector3 visionPoint;
 
     private void Awake()
     {
-        highPoint = centerCelling.position;
+        visionPoint = centerCelling.position;
     }
-
 
     private void FixedUpdate()
     {
         // Revient sur la Tete
-        if (wantsToRest && (transform.position != RestPos.position))
+        if (wantsToRest)
         {
-            isUsingVision = false;
-            transform.position = Vector3.MoveTowards(transform.position, RestPos.position, .15f);
-        } else if (wantsToRest && transform.position == RestPos.position) // Quand est sur la tete, arrete de vouloir etre sur la tete
-        {
-            isAtCelling = false;
-            wantsToRest = false;
-            animCrow.SetBool("isFlying", false);
-            PlayerMvt.switchAnimationLayer(true);
+            if (transform.position == RestPos.position) // Quand est sur la tete, arrete de vouloir etre sur la tete
+            {
+                isAtCelling = false;
+                wantsToRest = false;
+                animCrow.SetBool("isFlying", false);
+                PlayerMvt.switchAnimationLayer(true);
+            }
+            else
+            {
+                isUsingVision = false;
+                transform.position = Vector3.MoveTowards(transform.position, RestPos.position, .15f);
+                FlipXIf(RestPos.position.x);
+            }
         }
 
         // Va au plafond
         if (isUsingVision)
         {
-            if (transform.position == highPoint) // Quand est au plafond, arrete de vouloir allez au plafond
+            if (transform.position == visionPoint) // Quand est au plafond, arrete de vouloir allez au plafond
             {
                 isAtCelling = true;
                 transform.SetParent(null);
             } else
             {
-                transform.position = Vector3.MoveTowards(transform.position, highPoint, .15f);
+                transform.position = Vector3.MoveTowards(transform.position, visionPoint, .15f);
                 animCrow.SetBool("isFlying", true);
                 PlayerMvt.switchAnimationLayer(false);
-                if (RestPos.position.x > highPoint.x)
-                {
-                    srOizo.flipX = false;
-                } else
-                {
-                    srOizo.flipX = true;
-                }
+                FlipXIf(visionPoint.x);
             }
             
-        }
-
-        if (wantsToRest)
-        {
-            if (RestPos.position.x > transform.position.x)
-            {
-                srOizo.flipX = true;
-            }
-            else
-            {
-                srOizo.flipX = false;
-            }
         }
     }
 
@@ -81,5 +67,19 @@ public class CorbeauMovement : MonoBehaviour
             transform.SetParent(PlayerMvt.transform);
             wantsToRest = true;
         }
+    }
+
+    //Check if sprite needs to flip
+    public void FlipXIf(float targetx)
+    {
+        if (targetx < transform.position.x)
+        {
+            srOizo.flipX = false;
+        }
+        else if (targetx > transform.position.x)
+        {
+            srOizo.flipX = true;
+        }
+        
     }
 }
