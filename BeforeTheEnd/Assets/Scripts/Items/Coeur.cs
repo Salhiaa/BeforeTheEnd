@@ -2,40 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coeur : MonoBehaviour
+public class Coeur : Interactable
 {
-    private GameObject GM;
-    bool playerCanInteract;
-
+    public Sprite itemSprite;
     void Awake()
     {
-        GM = GameObject.Find("GameManager");
-        if (GM.GetComponent<GameManager>().gotHeart == true) Destroy(gameObject);
+        if (GameManager.Instance.gotHeart)
+            MoveHeart();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerCanInteract)
-        {
-            GM.GetComponent<GameManager>().pickHeart();
+        if (!GameManager.Instance.gotHeart) {
+            GameManager.Instance.PickItem("Heart", itemSprite);
+            GameManager.Instance.gotHeart = true;
             gameObject.SetActive(false);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void MoveHeart()
     {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = false;
-        }
+        GetComponent<Transform>().position = new Vector3(5.83f, -0.73f, 0);
     }
 }

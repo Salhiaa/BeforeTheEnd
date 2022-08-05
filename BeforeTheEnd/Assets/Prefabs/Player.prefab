@@ -1296,6 +1296,8 @@ GameObject:
   - component: {fileID: 9099140745989086647}
   - component: {fileID: 2039263754}
   - component: {fileID: 2039263753}
+  - component: {fileID: 4834289999465793316}
+  - component: {fileID: 6104303968147623809}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -1357,6 +1359,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2dafb0c04778f4eb575484c9e202eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &4834289999465793316
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745907689963208349}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.09}
+  serializedVersion: 2
+  m_Radius: 0.06
+--- !u!114 &6104303968147623809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745907689963208349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2dafb0c04778f4eb575484c9e202eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4745907690125137543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,8 +1398,8 @@ GameObject:
   - component: {fileID: 4745907690125137536}
   - component: {fileID: 4745907690125137537}
   - component: {fileID: 5090469069572932523}
-  - component: {fileID: 3587003164415039304}
   - component: {fileID: 7438781702888008817}
+  - component: {fileID: 2070938204710294440}
   m_Layer: 0
   m_Name: Crow
   m_TagString: Player
@@ -1430,8 +1460,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 979557577
   m_SortingLayer: 2
-  m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 9f34714e3812ae841aca7593b355ae4a, type: 3}
+  m_SortingOrder: 6
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -1439,7 +1469,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5090469069572932523
@@ -1455,28 +1485,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RestPos: {fileID: 7649628451104366100}
-  centerCelling: {fileID: 0}
   animCrow: {fileID: 7438781702888008817}
   srOizo: {fileID: 4745907690125137537}
-  Player: {fileID: 4745907690213364750}
-  PlayerMvt: {fileID: 0}
+  PlayerMvt: {fileID: 4745907690213364751}
   wantsToRest: 0
   isUsingVision: 0
   isAtCelling: 0
---- !u!114 &3587003164415039304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4745907690125137543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa2a65fcfb9a60546967991b862c3fd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lePiaf: {fileID: 5090469069572932523}
-  toggleableObjects: []
 --- !u!95 &7438781702888008817
 Animator:
   serializedVersion: 3
@@ -1496,6 +1510,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2070938204710294440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745907690125137543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7107ccbbb04fd4bb8154db6445f34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lePiaf: {fileID: 5090469069572932523}
+  toggleableObjects: []
+  mainCamera: {fileID: 0}
 --- !u!1 &4745907690213364750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,6 +1541,7 @@ GameObject:
   - component: {fileID: 4745907690213364751}
   - component: {fileID: 8998939329305758955}
   - component: {fileID: 1390945777}
+  - component: {fileID: 197767335281485115}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1576,8 +1606,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 7807b42a143cbb84ba37e185ce61bae9, type: 3}
+  m_SortingOrder: 6
+  m_Sprite: {fileID: 21300000, guid: 7d9d63524caa60449b726eb98f84b09c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -1646,37 +1676,25 @@ MonoBehaviour:
     m_ActionId: e5bb75f2-9df2-4504-a86f-b6b2a802ad36
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9099140745989086647}
+        m_TargetAssemblyTypeName: GroundCheckScript, Assembly-CSharp
+        m_MethodName: PassThroughFloor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6618ac05-e890-4609-b651-c7b44bb562fa
     m_ActionName: Player/PassTroughFloor[/Keyboard/w]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8688395375307590418, guid: 9bfb60eb02d7ca8488a30e0930fb5a86, type: 3}
-        m_TargetAssemblyTypeName: Door, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Door, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Door, Assembly-CSharp
+      - m_Target: {fileID: 197767335281485115}
+        m_TargetAssemblyTypeName: PlayerInteractionHandler, Assembly-CSharp
         m_MethodName: Interact
         m_Mode: 0
         m_Arguments:
@@ -1691,10 +1709,10 @@ MonoBehaviour:
     m_ActionName: Player/Interact[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CorbeauVision, Assembly-CSharp
-        m_MethodName: Toggle
-        m_Mode: 1
+      - m_Target: {fileID: 2070938204710294440}
+        m_TargetAssemblyTypeName: CrowPowers, Assembly-CSharp
+        m_MethodName: CrowVision
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1705,6 +1723,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 22a540bb-9f3b-449c-ba83-de6fb07b650e
     m_ActionName: Player/Vision[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2070938204710294440}
+        m_TargetAssemblyTypeName: CrowPowers, Assembly-CSharp
+        m_MethodName: CrowFetch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 44d6b1ca-ad1f-41c5-8e85-d70007de5e74
+    m_ActionName: Player/CrowReach[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -1768,8 +1802,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   srPlayer: {fileID: 4745907690213364747}
-  srOizo: {fileID: 4745907690125137537}
-  crowRested: 0
 --- !u!114 &8998939329305758955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,6 +1847,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &197767335281485115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745907690213364750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f303c7c915ce5654297c6d44ea457272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5394677105282122243
 GameObject:
   m_ObjectHideFlags: 0

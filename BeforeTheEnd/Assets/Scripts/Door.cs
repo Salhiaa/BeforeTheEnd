@@ -2,37 +2,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class Door : MonoBehaviour
+public class Door : Interactable
 {
     [SerializeField] string scene;
-    bool playerCanInteract = false;
     public  bool isLocked = false;
     [SerializeField] Vector3 goTo;
 
-    public void Update()
+    public override void Interact()
     {
-        if (playerCanInteract && !isLocked && Input.GetKeyDown(KeyCode.E))
+        if (!isLocked)
         {
             GameObject.Find("Player").GetComponent<SFXManager>().PlayOuverturePorte();
             Debug.Log("interact");
-            GameManager.instance.setSpawnPoint(goTo);
+            GameManager.Instance.setSpawnPoint(goTo);
             SceneManager.LoadScene(scene);
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = true;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = false;
         }
     }
 }

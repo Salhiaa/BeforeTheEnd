@@ -1,92 +1,75 @@
 using UnityEngine;
 
-public class Jardinier : MonoBehaviour
+public class Jardinier : Interactable
 {
-    public Sprite[] etatJardinier;
+    
     [SerializeField] string[] firstInteraction;
     [SerializeField] string[] whenFreed;
     [SerializeField] Monologue speechBox;
+    public uint linesIndex = 0;
+    
+    public Sprite itemSprite;
 
-    uint linesIndex = 0;
-    bool playerCanInteract;
-    bool freed = false;
+    public Sprite GardenerFreed;
+    public bool freed = false;
 
-    GameObject GM;
-    GameObject CrowsEye;
+    public GameObject CrowsEye;
 
-    private void Start() {
-        GM=GameObject.Find("GameManager");
-        if (GM.GetComponent<GameManager>().usedKeyCage) GetComponent<SpriteRenderer>().sprite = etatJardinier[1];
+    private void Awake()
+    {
+        if (GameManager.Instance.usedKeyCage)
+            GetComponent<SpriteRenderer>().sprite = GardenerFreed;
     }
 
-    private void Update()
+    public override void Interact()
     {
-        if (playerCanInteract && Input.GetKeyDown(KeyCode.E))
+        //Si le joueur donne la clef
+        if (GameManager.Instance.item == "KeyCage")
         {
-            //Si le joueur donne la clef
-            if (GM.GetComponent<GameManager>().item == "KeyCage") 
-            {
-                GM.GetComponent<GameManager>().UseKeyCage();
-                speechBox.Say(whenFreed[0], false);
-                gameObject.GetComponent<SpriteRenderer>().sprite = etatJardinier[1];
-                linesIndex++;
-                freed = true;
-            }
-            //Apres que le joueur ait donne la clef
-            else if (freed)
-            {
-                if (linesIndex <= whenFreed.Length - 1)
-                {
-                    speechBox.Say(whenFreed[linesIndex], false);
-                }
-                
-                else if (linesIndex == whenFreed.Length) //fin du texte
-                {
-                    speechBox.Say(whenFreed[0], true);
-                    CrowsEye=GameObject.Find("CrowsEye");
-                    CrowsEye.SetActive(true);
-                    GM.GetComponent<GameManager>().canUseVision = true;
-                }
-                else //apres la fin du texte
-                {
-                    CrowsEye.SetActive(false);
-                }
-                linesIndex++;
-            }
-            //Sinon, premiere interaction
-            else
-            {
-                if (linesIndex <= firstInteraction.Length - 1)
-                {
-                    speechBox.Say(firstInteraction[linesIndex], false);
-                }
-                else //fin du texte
-                {
-                    speechBox.Say(firstInteraction[0], true);
-                    if(!GM.GetComponent<GameManager>().gotBottle){
-                        GM.GetComponent<GameManager>().PickBottle();
-                    }
-                }
-                linesIndex++;
-            }
+            GameManager.Instance.UseItem("KeyCage");
+            GameManager.Instance.usedKeyCage = true;
+            speechBox.Say(whenFreed[0], false);
+            gameObject.GetComponent<SpriteRenderer>().sprite = GardenerFreed;
+            freed = true;
+            linesIndex++;
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        //Apres que le joueur ait donne la clef
+        else if (freed)
         {
-            playerCanInteract = true;
+            if (linesIndex <= whenFreed.Length - 1)
+            {
+                speechBox.Say(whenFreed[linesIndex], false);
+            }
+
+            else if (linesIndex == whenFreed.Length) //fin du texte
+            {
+                speechBox.Say(whenFreed[0], true);
+                CrowsEye.SetActive(true);
+                GameManager.Instance.canUseVision = true;
+            }
+            else //apres la fin du texte
+            {
+                CrowsEye.SetActive(false);
+            }
+            linesIndex++;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        //Sinon, premiere interaction
+        else
         {
-            playerCanInteract = false;
-            speechBox.Say("", true);
-            linesIndex = 0;
+            if (linesIndex <= firstInteraction.Length - 1)
+            {
+                speechBox.Say(firstInteraction[linesIndex], false);
+            }
+            else //fin du texte
+            {
+                speechBox.Say(firstInteraction[0], true);
+                if (!GameManager.Instance.gotBottle)
+                {
+                    GameManager.Instance.PickItem("EmptyBottle", itemSprite);
+                    GameManager.Instance.gotBottle = true;
+                }
+            }
+            linesIndex++;
         }
     }
 }

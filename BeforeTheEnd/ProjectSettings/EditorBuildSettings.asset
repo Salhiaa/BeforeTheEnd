@@ -27,4 +27,4 @@ EditorBuildSettings:
     path: Assets/Scenes/SalleDanse.unity
     guid: d436eb3cba3587142af865063fa33f81
   m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: d9b92bccfbe704a43bc60896fb38bf77, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 9e5c41f5bda8be247a92ac4dab301157, type: 2}

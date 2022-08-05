@@ -2,89 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DanseuseD : MonoBehaviour
+public class DanseuseD : Interactable
 {
-    public Sprite[] etatDanseuseD;
-    [SerializeField] SpriteRenderer srDanseuse;
-
-    [SerializeField] string BeforeAwakening;
-    [SerializeField] string[] Awakening;
-
+    [Header("Speech components")]
     [SerializeField] Monologue speechBox;
     [SerializeField] Dialogue dial;
-
-    private GameObject GM;
-    public GameObject CrowsWings;
-
     uint linesIndex;
-    bool playerCanInteract;
-    public bool awakened;
+
+    [Header("First Interaction")]
+    [SerializeField] string BeforeAwakening;
+
+    [Header("When Awakened")]
+    [SerializeField] Sprite awakened;
+    [SerializeField] string[] Awakening;
+    bool isAwake;
+
+    [Header("Power Info")]
+    public GameObject CrowsWings;
+    
+    
 
     void Awake()
     {
-        GM = GameObject.Find("GameManager");
-
-        if (GM.GetComponent<GameManager>().dancerAwakened == true) {
+        if (GameManager.Instance.dancerAwakened == true)
             WakeUp();
-        }
     }
 
-    // Update is called once per frame
-    private void Update()
+    //---gestion du dialogue---
+    public override void Interact()
     {
-        //---gestion du dialogue---
-        if (playerCanInteract && Input.GetKeyDown(KeyCode.E))
+        //Awakening
+        if (isAwake)
         {
-            //Awakening
-            if (awakened)
+            if (linesIndex <= Awakening.Length - 1)
             {
-                if (linesIndex <= Awakening.Length - 1) { 
-                    dial.Say(Awakening[linesIndex]);
-                    linesIndex++;
-                }
-                else if (linesIndex == Awakening.Length) //fin de l'interaction
-                {
-                    //hide speechbox
-                    speechBox.Say("", true);
-                    //show power indication
-                    CrowsWings.SetActive(true);
-                    //grant power
-                    GM.GetComponent<GameManager>().canUseVision = true;
-                }
-                else //hide power indication
-                {
-                    CrowsWings.SetActive(false);
-                }
+                dial.Say(Awakening[linesIndex]);
             }
-            //Before Awakening
-            else
+            else if (linesIndex == Awakening.Length) //fin de l'interaction
+            {
+                //hide speechbox
+                speechBox.Say("", true);
+                //show power indication
+                CrowsWings.SetActive(true);
+                //grant power
+                GameManager.Instance.canUseVision = true;
+            }
+            else //hide power indication
+            {
+                CrowsWings.SetActive(false);
+            }
+            linesIndex++;
+        }
+        //Before Awakening
+        else
+        {
+            if (linesIndex == 0)
             {
                 speechBox.Say(BeforeAwakening, false);
+                linesIndex++;
+            } else
+            {
+                speechBox.Say("", true);
             }
+            
         }
     }
 
-    public void WakeUp() {
-        srDanseuse.sprite = etatDanseuseD[1];
-        awakened = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void WakeUp()
     {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = false;
-            dial.clear();
-            speechBox.Say("", true);
-            linesIndex = 0;
-        }
+        GetComponent<SpriteRenderer>().sprite = awakened;
+        isAwake = true;
     }
 }

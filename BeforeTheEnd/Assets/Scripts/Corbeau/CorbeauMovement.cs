@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class CorbeauMovement : MonoBehaviour
 {
     [SerializeField] Transform RestPos;
-    [SerializeField] Transform centerCelling;
 
     [SerializeField] Animator animCrow;
     [SerializeField] SpriteRenderer srOizo;
@@ -17,9 +16,14 @@ public class CorbeauMovement : MonoBehaviour
     public bool isUsingVision, isAtCelling;
     Vector3 visionPoint;
 
+    private Transform selfTransform;
+    private Transform playerTransform;
+
     private void Awake()
     {
-        visionPoint = centerCelling.position;
+        visionPoint = new Vector3 (0, 4.92f, 0);
+        selfTransform = transform;
+        playerTransform = PlayerMvt.transform;
     }
 
     private void FixedUpdate()
@@ -27,7 +31,7 @@ public class CorbeauMovement : MonoBehaviour
         // Revient sur la Tete
         if (wantsToRest)
         {
-            if (transform.position == RestPos.position) // Quand est sur la tete, arrete de vouloir etre sur la tete
+            if (selfTransform.position == RestPos.position) // Quand est sur la tete, arrete de vouloir etre sur la tete
             {
                 isAtCelling = false;
                 wantsToRest = false;
@@ -37,34 +41,36 @@ public class CorbeauMovement : MonoBehaviour
             else
             {
                 isUsingVision = false;
-                transform.position = Vector3.MoveTowards(transform.position, RestPos.position, .15f);
+                selfTransform.position = Vector3.MoveTowards(selfTransform.position, RestPos.position, .15f);
                 FlipXIf(RestPos.position.x);
             }
         }
 
         // Va au plafond
-        if (isUsingVision)
+        if (isUsingVision & !isAtCelling)
         {
-            if (transform.position == visionPoint) // Quand est au plafond, arrete de vouloir allez au plafond
+            if (selfTransform.position == visionPoint) // Quand est au plafond, arrete de vouloir allez au plafond
             {
                 isAtCelling = true;
-                transform.SetParent(null);
+                selfTransform.SetParent(null);
             } else
             {
-                transform.position = Vector3.MoveTowards(transform.position, visionPoint, .15f);
+                selfTransform.position = Vector3.MoveTowards(selfTransform.position, visionPoint, .15f);
                 animCrow.SetBool("isFlying", true);
                 PlayerMvt.switchAnimationLayer(false);
                 FlipXIf(visionPoint.x);
             }
-            
         }
+
+        // Va chercher un objet
+
     }
 
     public void Rest()
     {
-        if(transform.position != RestPos.position)
+        if(selfTransform.position != RestPos.position)
         {
-            transform.SetParent(PlayerMvt.transform);
+            selfTransform.SetParent(playerTransform);
             wantsToRest = true;
         }
     }
@@ -72,11 +78,11 @@ public class CorbeauMovement : MonoBehaviour
     //Check if sprite needs to flip
     public void FlipXIf(float targetx)
     {
-        if (targetx < transform.position.x)
+        if (targetx < selfTransform.position.x)
         {
             srOizo.flipX = false;
         }
-        else if (targetx > transform.position.x)
+        else if (targetx > selfTransform.position.x)
         {
             srOizo.flipX = true;
         }

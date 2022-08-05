@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CrowReach",
+                    "name": "CrowFetch",
                     "type": "Button",
                     "id": "44d6b1ca-ad1f-41c5-8e85-d70007de5e74",
                     "expectedControlType": "Button",
@@ -75,8 +75,8 @@
                 {
                     "name": "",
                     "id": "31c82176-fc40-47fb-b836-b3a23333a40c",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
+                    "path": "<Keyboard>/s",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "PassTroughFloor",
@@ -120,7 +120,7 @@
                     "name": "",
                     "id": "25c07641-eea8-46e3-b831-d57b1a446d88",
                     "path": "<Keyboard>/e",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Interact",
@@ -131,7 +131,7 @@
                     "name": "",
                     "id": "401065e4-0173-4587-8c75-d1f5fe464a4b",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "CrowVision",
@@ -145,7 +145,63 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "CrowReach",
+                    "action": "CrowFetch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Menu",
+            "id": "75379d85-7497-47d7-bdaa-d3fb55142b99",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "ca8a1a5f-3b04-4dcc-a07a-d4c97aa148e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "69e1f4bb-6ff0-48c5-a33a-2eea6a7014d2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Dialogue",
+            "id": "8044f974-2948-47e5-a091-b22e053363ff",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "8b56886a-75d3-4a2c-9b4c-8b447870e93f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2ade52da-ea4b-4e3b-82b0-320bedfd6d25",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

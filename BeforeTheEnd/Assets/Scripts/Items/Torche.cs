@@ -2,35 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Torche : MonoBehaviour
+public class Torche : Interactable
 {
-    private GameObject GM;
-    private bool playerCanInteract = false;
+    public Sprite itemSprite;
 
     private void Awake() {
-        GM = GameObject.Find("GameManager");
-        if (GM.GetComponent<GameManager>().torchPickedUp==true) Destroy(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E) && GM.GetComponent<GameManager>().alreadyVisitedEntree && playerCanInteract){
-            GM.GetComponent<GameManager>().PickTorch();
+        if (GameManager.Instance.Darkness)
+            GameManager.Instance.Darkness.SetActive(false);
+        if (GameManager.Instance.torchPickedUp)
+        {
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other.name == "Player")
+    public override void Interact()
+    {
+        if(GameManager.Instance.alreadyVisitedEntree)
         {
-            playerCanInteract=true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.name == "Player")
-        {
-            playerCanInteract=false;
+            GameManager.Instance.PickItem("Torch", itemSprite);
+            GameManager.Instance.torchPickedUp = true;
+            Destroy(gameObject);
         }
     }
 }

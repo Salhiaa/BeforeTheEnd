@@ -2,44 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pot : MonoBehaviour
+public class Pot : Interactable
 {
-    private GameObject GM;
-    private bool playerCanInteract = false;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject Plant;
+    public GameObject Sprout;
+    public Jardinier Gardener;
+
+    private void Awake()
     {
-        GM = GameObject.Find("GameManager");
-        if (GM.GetComponent<GameManager>().plantGrew){
-            GameObject.Find("TroncPlante").SetActive(true);
-        }
+        if (GameManager.Instance.plantGrew)
+            Plant.SetActive(true);
+        else if (GameManager.Instance.usedSeeds)
+            Sprout.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact()
     {
-        if(Input.GetKeyDown(KeyCode.E) && GM.GetComponent<GameManager>().item=="Seeds" && playerCanInteract){
+        if (GameManager.Instance.item2 == "Seeds")
+        {
             print("Seeds ok");
+            GameManager.Instance.UseItem("Seeds");
+            GameManager.Instance.usedSeeds = true;
+            if (GameManager.Instance.item == "FullBottle") 
+            {
+                GrowPlant();
+            } else
+            {
+                Sprout.SetActive(true);
+            }
         }
-        if(Input.GetKeyDown(KeyCode.E) && GM.GetComponent<GameManager>().item2=="FullBottle" && playerCanInteract){
-            print("bouteille ok");
-        }
-        if(Input.GetKeyDown(KeyCode.E) && GM.GetComponent<GameManager>().item2=="FullBottle" && GM.GetComponent<GameManager>().item=="Seeds" && playerCanInteract){
-            GM.GetComponent<GameManager>().GrowPlant();
-            print("combo ok");
+        if (GameManager.Instance.item=="FullBottle"){
+            if (GameManager.Instance.usedSeeds)
+            {
+                Sprout.SetActive(false);
+                GrowPlant();
+            } else {
+                GameManager.Instance.PickItem("EmptyBottle", Gardener.itemSprite, "FullBottle");
+            }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other.name == "Player")
-        {
-            playerCanInteract=true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.name == "Player")
-        {
-            playerCanInteract=false;
-        }
+    private void GrowPlant()
+    {
+        Plant.SetActive(true);
+        GameManager.Instance.UseItem("FullBottle");
+        GameManager.Instance.plantGrew = true;
     }
 }

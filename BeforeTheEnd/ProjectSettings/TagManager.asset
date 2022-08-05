@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - VisibleToggleableObjects
   - Interactable
   - PassPlatform
+  - CrowInteractable
   layers:
   - Default
   - TransparentFX

@@ -11,8 +11,8 @@ public class NextScreen : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("interact");
-            GameManager.instance.setSpawnPoint(goTo);
+            //Debug.Log("interact");
+            GameManager.Instance.setSpawnPoint(goTo);
             SceneManager.LoadScene(scene);
         }
     }

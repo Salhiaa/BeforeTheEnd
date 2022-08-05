@@ -1,44 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class GiveHeart : MonoBehaviour
+public class GiveHeart : Interactable
 {
-    private GameObject GM;
-    public GameObject Dancer;
+    public DanseuseD Dancer;
     public GameObject heart;
-    bool playerCanInteract;
 
-    void Awake()
+    public override void Interact()
     {
-        GM = GameObject.Find("GameManager");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && GM.GetComponent<GameManager>().gotHeart && playerCanInteract)
+        if (GameManager.Instance.item == "Heart")
         {
-            heart.GetComponent<Transform>().position = new Vector3(5.83f, -0.73f, 0);
+            heart.GetComponent<Coeur>().MoveHeart();
             heart.SetActive(true);
-            GM.GetComponent<GameManager>().AwakenDancer();
-            Dancer.GetComponent<DanseuseD>().WakeUp();
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerCanInteract = false;
+            GameManager.Instance.UseItem("Heart");
+            GameManager.Instance.dancerAwakened = true;
+            Dancer.WakeUp();
         }
     }
 }

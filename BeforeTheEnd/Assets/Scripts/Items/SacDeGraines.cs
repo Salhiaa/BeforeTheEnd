@@ -2,36 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SacDeGraines : MonoBehaviour
+public class SacDeGraines : Interactable
 {
-    private GameObject GM;
-    private bool playerCanInteract = false;
-    // Start is called before the first frame update
-    void Start()
+    public Sprite itemSprite;
+    private void Awake()
     {
-        GM = GameObject.Find("GameManager");
-        if (GM.GetComponent<GameManager>().gotSeeds) Destroy(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E) && GM.GetComponent<GameManager>().item=="" && playerCanInteract){
-            GM.GetComponent<GameManager>().pickSeeds();
+        if (GameManager.Instance.gotSeeds)
             Destroy(gameObject);
-        }
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other.name == "Player")
+    public override void Interact()
+    {
+        if (GameManager.Instance.gotBottle)
         {
-            playerCanInteract=true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.name == "Player")
-        {
-            playerCanInteract=false;
+            GameManager.Instance.PickItem("Seeds", itemSprite);
+            GameManager.Instance.gotSeeds = true;
+            Destroy(gameObject);
         }
     }
 }

@@ -2,37 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cheminee : MonoBehaviour
+public class Cheminee : Interactable
 {
-    private GameObject GM;
-    private bool playerCanInteract;
     public Sprite litSprite;
-    // Start is called before the first frame update
-    void Start()
+    public Door GreenhouseDoor;
+
+    void Awake()
     {
-        GM = GameObject.Find("GameManager");
-        if (GM.GetComponent<GameManager>().fireplaceLit) gameObject.GetComponent<SpriteRenderer>().sprite = litSprite;
+        if (!GameManager.Instance.Darkness)
+        {
+            FireplaceLit();
+        } else
+        {
+            GameManager.Instance.Darkness.SetActive(true);
+
+            if (!GameManager.Instance.alreadyVisitedEntree)
+            {
+                GameManager.Instance.alreadyVisitedEntree = true;
+            }
+            
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Interact()
     {
-        if(Input.GetKeyDown(KeyCode.E) && playerCanInteract && GM.GetComponent<GameManager>().item=="torche"){
-            GM.GetComponent<GameManager>().LightFireplace();
-            gameObject.GetComponent<SpriteRenderer>().sprite = litSprite;
+        if(GameManager.Instance.item=="Torch"){
+            FireplaceLit();
+            GameManager.Instance.UseItem("Torch");
+            Destroy(GameManager.Instance.Darkness);
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other.name == "Player")
-        {
-            playerCanInteract=true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.name == "Player")
-        {
-            playerCanInteract=false;
-        }
+    private void FireplaceLit()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = litSprite;
+        GreenhouseDoor.isLocked = false;
     }
 }

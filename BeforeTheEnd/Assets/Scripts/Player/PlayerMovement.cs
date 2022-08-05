@@ -14,17 +14,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundPoint;
     [SerializeField] LayerMask ground;
 
-    [SerializeField] SpriteRenderer srPlayer; //, srOizo;
+    [SerializeField] SpriteRenderer srPlayer;
 
     private float inputX;
     private bool isGrounded;
-    //public bool crowRested;
 
     private bool inverted = false;
 
     private void Start()
     {
-        transform.position = GameManager.instance.getSpawnPoint();
+        transform.position = GameManager.Instance.spawnPoint;
         //rb = GetComponent<Rigidbody2D>(); 
         //animPlayer = GetComponent<Animator>();
     }
@@ -60,13 +59,12 @@ public class PlayerMovement : MonoBehaviour
         {
             animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = true;
-            
         }
         else if (inputX < 0)
         {
             animPlayer.SetBool("isWalking", true); 
             srPlayer.flipX = false;
-        } else if (inputX == 0)
+        } else
         {
             animPlayer.SetBool("isWalking", false);
         }
@@ -75,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     //Player Jump
     public void Jump(InputAction.CallbackContext context)
     {
-        if (isGrounded)
+        if (context.started && isGrounded)
         {
             animPlayer.SetTrigger("takeOff");
         }
