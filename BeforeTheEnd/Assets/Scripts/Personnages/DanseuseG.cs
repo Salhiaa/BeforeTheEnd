@@ -2,41 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DanseuseG : Interactable
+public class DanseuseG : Character
 {
-    public Sprite move;
+    [Header("Sprite")]
+    [SerializeField] Sprite move;
     [SerializeField] SpriteRenderer srDanseuse;
 
+    [Header("Monologue")]
+    //[SerializeField] Monologue speechBox;
     [SerializeField] string[] firstInteraction;
-    [SerializeField] Monologue speechBox;
+    [SerializeField] GameObject[] appearAfterSpeech;
 
-    public GameObject[] appearAfterSpeech;
+    //[Header("Player Movement")]
+    //[SerializeField] PlayerMovement player;
 
-    uint linesIndex;
+    //uint linesIndex;
 
     private void Awake()
     {
-        if (GameManager.Instance.talkedToWaitress && !GameManager.Instance.gotHeart)
-        {
+        if (GameManager.Instance.talkedToWaitress)
             Show();
-        }
     }
 
     public override void Interact()
     {
-        //Premiere interaction
+        // --- Monologue : First Interaction --- //
         if (linesIndex <= firstInteraction.Length - 1)
         {
             speechBox.Say(firstInteraction[linesIndex], false);
         }
-        else //fin de l'interaction
+        // End of interaction
+        else
         {
             Show();
             GetComponent<Transform>().position = new Vector3(-3.04f, -0.02f, -2f);
             speechBox.Say(firstInteraction[0], true);
             GameManager.Instance.talkedToWaitress = true;
+            EndDialogue(); // Give Movement back to player
         }
-        linesIndex++;
+
+        base.Interact();
     }
 
     private void Show()
@@ -45,7 +50,7 @@ public class DanseuseG : Interactable
         {
             element.SetActive(true);
         }
-        GetComponent<SpriteRenderer>().sprite = move;
+        srDanseuse.sprite = move;
         GetComponent<Transform>().position = new Vector3(-3.04f, -0.02f, -2f);
     }
 }

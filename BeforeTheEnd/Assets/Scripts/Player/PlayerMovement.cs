@@ -1,60 +1,90 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] Animator animPlayer;
-
+    // Movement
+    [Header("Movement")]
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
-
-    [SerializeField] Transform groundPoint;
-    [SerializeField] LayerMask ground;
-
-    [SerializeField] SpriteRenderer srPlayer;
-
+    public bool inverted;
+    Rigidbody2D rb;
     private float inputX;
+
+    // Animation
+    [Header("Sprite")]
+    [SerializeField] SpriteRenderer srPlayer;
+    Animator animPlayer;
+    int CrowLayer;
+    int BaseLayer;
+
+    // Input action map
+    private InputActionMap playerMap;
+    // Crow Powers
+    //private CrowPowers crow;
+
+    // Ground Check
+    [Header("Ground Check")]
+    [SerializeField] Transform groundCollision;
+    [SerializeField] LayerMask ground;
     private bool isGrounded;
 
-    private bool inverted = false;
+
 
     private void Start()
     {
+        // Set player position
         transform.position = GameManager.Instance.spawnPoint;
-        //rb = GetComponent<Rigidbody2D>(); 
-        //animPlayer = GetComponent<Animator>();
+
+        // Get rigidBody
+        rb = GetComponent<Rigidbody2D>(); 
+
+        // Set animator and animation layers
+        animPlayer = GetComponent<Animator>();
+        CrowLayer = animPlayer.GetLayerIndex("Crow Layer");
+        BaseLayer = animPlayer.GetLayerIndex("Base Layer");
+
+        // ActionMaps
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        playerMap = playerInput.actions.FindActionMap("Player");
+        playerMap.Enable();
+        playerInput.actions.FindActionMap("Interaction").Enable();
+
+        // Find crow
+        //crow = GetComponentInChildren<CrowPowers>();
     }
     
     private void FixedUpdate()
     {
+        // Set velocity
         rb.velocity = new Vector2(inputX * moveSpeed, rb.velocity.y);
-        //print(GetComponent<SpriteRenderer>().sprite.name);
-        isGrounded = Physics2D.OverlapCircle(groundPoint.position, .2f, ground); // magic number whatever
+        // Test if player touches ground
+        isGrounded = Physics2D.OverlapCircle(groundCollision.position, .2f, ground); // magic number whatever
         
-        //Si l'animation de préparation au saut est complète
-        if (GetComponent<SpriteRenderer>().sprite.name == "PPsaut0008" || GetComponent<SpriteRenderer>().sprite.name == "PPsautWCrow0008")
+        // Launch jump after preparation animation
+        if (srPlayer.sprite.name == "PPsaut0008" || srPlayer.sprite.name == "PPsautWCrow0008")
         {
             animPlayer.SetBool("isJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             GetComponent<SFXManager>().PlayJump();
         }
-        //Si le joueur vient d'atterrir
+        // Landing
         if (animPlayer.GetBool("isJumping") && rb.velocity.y < 0.01 && isGrounded)
         {
             animPlayer.SetBool("isJumping", false);
         }
     }
 
+    // Player walk
     public void Move(InputAction.CallbackContext context)
     {
+        // Move and check if movement is inverted
         if (!inverted)
             inputX = context.ReadValue<Vector2>().x;
         else
             inputX = -context.ReadValue<Vector2>().x;
 
+        // Play and flip animation
         if (inputX > 0)
         {
             animPlayer.SetBool("isWalking", true); 
@@ -70,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Player Jump
+    // Player Jump
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.started && isGrounded)
@@ -79,24 +109,31 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Invert controls (level 3 : shore)
-    public void invertControls()
-    {
-        inverted = !inverted;
-    }
-
-    //Add/remove crow
+    // Add/Remove crow
     public void switchAnimationLayer(bool hasCrow)
     {
         if (hasCrow)
         {
-            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Crow Layer"), 1);
-            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Base Layer"), 0);
+            animPlayer.SetLayerWeight(CrowLayer, 1);
+            animPlayer.SetLayerWeight(BaseLayer, 0);
         }
         else
         {
-            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Crow Layer"), 0);
-            animPlayer.SetLayerWeight(animPlayer.GetLayerIndex("Base Layer"), 1);
+            animPlayer.SetLayerWeight(CrowLayer, 0);
+            animPlayer.SetLayerWeight(BaseLayer, 1);
         }
+    }
+
+    // Disable movement for dialogue
+    public void switchToDialogue()
+    {
+        playerMap.Disable();
+        //crow.ToggleVision();
+    }
+    // Re-enable movement
+    public void switchToMovement()
+    {
+        playerMap.Enable();
+        //crow.ToggleVision();
     }
 }

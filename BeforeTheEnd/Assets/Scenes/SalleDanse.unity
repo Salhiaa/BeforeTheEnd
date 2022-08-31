@@ -154,7 +154,7 @@ Transform:
   - {fileID: 1412746844}
   - {fileID: 923493934}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &70965663
 GameObject:
@@ -236,7 +236,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &300207595
 GameObject:
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 429545881}
   - component: {fileID: 429545882}
   m_Layer: 0
-  m_Name: InvisibleWallR
+  m_Name: PreviousScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &429545881
 BoxCollider2D:
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 686394406}
   - component: {fileID: 686394407}
   m_Layer: 0
-  m_Name: Speech
+  m_Name: DialogueManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -457,14 +457,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686394405}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 0.21, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1855016653}
-  - {fileID: 1183604072}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.62814, y: 0.404425, z: 0}
+  m_LocalScale: {x: 2.8887503, y: 2.8887503, z: 2.8887503}
+  m_Children: []
+  m_Father: {fileID: 1976624234}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &686394407
 MonoBehaviour:
@@ -510,7 +508,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &717887165
 BoxCollider2D:
@@ -760,6 +758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a593cdff035ca64cb172d60613beb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speechBox: {fileID: 1965963150}
+  PowerIndication: {fileID: 0}
   move: {fileID: 21300000, guid: 8c4c80272ea530a418d57d4f19b18859, type: 3}
   srDanseuse: {fileID: 923493933}
   firstInteraction:
@@ -777,7 +777,6 @@ MonoBehaviour:
   - I told myself, day after day.
   - Yet, you want to try anyway?
   - 'Maybe, for you, she will open her eyes. '
-  speechBox: {fileID: 1965963150}
   appearAfterSpeech:
   - {fileID: 300207595}
   - {fileID: 1296742063}
@@ -842,7 +841,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.79, y: -0.16, z: 0}
   m_LocalScale: {x: 0.3469303, y: 0.3469303, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 1855016653}
   m_Father: {fileID: 27212184}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1095,15 +1095,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 686394406}
+    m_TransformParent: {fileID: 1976624234}
     m_Modifications:
     - target: {fileID: 322400018866572066, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_Name
       value: SpeechBoxD
-      objectReference: {fileID: 0}
-    - target: {fileID: 322400018866572066, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5971692342179295147, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: DialogBox
@@ -1119,7 +1115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1147,11 +1143,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6
+      value: 17.332502
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 8.666251
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.8887503
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1183,11 +1183,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.51
+      value: -11.266127
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.404425
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1283,12 +1283,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217672636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 0.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.790402, y: -0.17332503, z: 0}
+  m_LocalScale: {x: 2.8887503, y: 2.8887503, z: 2.8887503}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1976624234}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1277488613
 GameObject:
@@ -1668,13 +1668,17 @@ PrefabInstance:
       propertyPath: toggleableObjects.Array.data[4]
       value: 
       objectReference: {fileID: 926603475}
+    - target: {fileID: 4745907690125137543, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4745907690213364750, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4745907690213364756, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4745907690213364756, guid: 27aed8f84f2e44c49ba1f1850244fb7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1812,7 +1816,7 @@ GameObject:
   - component: {fileID: 1464701945}
   - component: {fileID: 1464701946}
   m_Layer: 0
-  m_Name: InvisibleWallL
+  m_Name: WallL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1830,7 +1834,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1464701946
 BoxCollider2D:
@@ -2456,22 +2460,18 @@ Transform:
   - {fileID: 1501010177}
   - {fileID: 1582645754}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1855016652
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 686394406}
+    m_TransformParent: {fileID: 923493934}
     m_Modifications:
     - target: {fileID: 322400018866572066, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_Name
       value: SpeechBoxG
-      objectReference: {fileID: 0}
-    - target: {fileID: 322400018866572066, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5971692342179295147, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: DialogBox
@@ -2514,6 +2514,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 17.29454
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8.64727
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2543,11 +2555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 10.059658
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 1.0664967
       objectReference: {fileID: 0}
     - target: {fileID: 6020738072843490874, guid: 1a04a5194536c854bb6c2fa77481696e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2616,6 +2628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBox: {fileID: 883064945}
+  PowerIndication: {fileID: 1217672636}
   dial: {fileID: 686394407}
   BeforeAwakening: ...
   awakened: {fileID: 21300000, guid: 6b70e49ed9e3d5f47b20c3af5a7286c9, type: 3}
@@ -2636,7 +2649,6 @@ MonoBehaviour:
   - 0/Even in this poor state.
   - 1/We will do great
   - 1/That, I can believe.
-  CrowsWings: {fileID: 1217672636}
 --- !u!212 &1976624233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2700,6 +2712,9 @@ Transform:
   m_LocalScale: {x: 0.34617043, y: 0.34617043, z: 0.34617043}
   m_Children:
   - {fileID: 1536912327}
+  - {fileID: 1217672638}
+  - {fileID: 1183604072}
+  - {fileID: 686394406}
   m_Father: {fileID: 27212184}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2903,5 +2918,5 @@ Transform:
   - {fileID: 2023590676}
   - {fileID: 300207597}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

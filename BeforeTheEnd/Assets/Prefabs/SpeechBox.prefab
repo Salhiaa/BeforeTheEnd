@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 6020738072843490874}
   - component: {fileID: 765438405391232582}
   - component: {fileID: 7324467338705916499}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SpeechBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6020738072843490874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afea3f59ec924144834376dcfffc49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonologueBox: {fileID: 322400018866572066}
+  TMP: {fileID: 7420209894755552550}
 --- !u!1 &2797842071865166892
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 8368721540393669282}
   - component: {fileID: 8745854799839882839}
   - component: {fileID: 3462144523824386232}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 2653353108868142762}
   - component: {fileID: 5818975471077930910}
   - component: {fileID: 7420209894755552550}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

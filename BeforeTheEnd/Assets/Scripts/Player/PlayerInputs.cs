@@ -37,15 +37,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""79bc5339-cbac-4252-b726-89123c048e03"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""e5bb75f2-9df2-4504-a86f-b6b2a802ad36"",
@@ -140,17 +131,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""25c07641-eea8-46e3-b831-d57b1a446d88"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""401065e4-0173-4587-8c75-d1f5fe464a4b"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Tap"",
@@ -168,6 +148,34 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""CrowFetch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Interaction"",
+            ""id"": ""8044f974-2948-47e5-a091-b22e053363ff"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b56886a-75d3-4a2c-9b4c-8b447870e93f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2ade52da-ea4b-4e3b-82b0-320bedfd6d25"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -196,34 +204,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Dialogue"",
-            ""id"": ""8044f974-2948-47e5-a091-b22e053363ff"",
-            ""actions"": [
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""8b56886a-75d3-4a2c-9b4c-8b447870e93f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""2ade52da-ea4b-4e3b-82b0-320bedfd6d25"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -296,17 +276,16 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_PassTroughFloor = m_Player.FindAction("PassTroughFloor", throwIfNotFound: true);
         m_Player_CrowVision = m_Player.FindAction("CrowVision", throwIfNotFound: true);
         m_Player_CrowFetch = m_Player.FindAction("CrowFetch", throwIfNotFound: true);
+        // Interaction
+        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
+        m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Select = m_Menu.FindAction("Select", throwIfNotFound: true);
-        // Dialogue
-        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
-        m_Dialogue_Interact = m_Dialogue.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -367,7 +346,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_PassTroughFloor;
     private readonly InputAction m_Player_CrowVision;
@@ -377,7 +355,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         private @PlayerInputs m_Wrapper;
         public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @PassTroughFloor => m_Wrapper.m_Player_PassTroughFloor;
         public InputAction @CrowVision => m_Wrapper.m_Player_CrowVision;
@@ -394,9 +371,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
@@ -416,9 +390,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -435,6 +406,39 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Interaction
+    private readonly InputActionMap m_Interaction;
+    private IInteractionActions m_InteractionActionsCallbackInterface;
+    private readonly InputAction m_Interaction_Interact;
+    public struct InteractionActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public InteractionActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_Interaction_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionActions instance)
+        {
+            if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
+            {
+                @Interact.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_InteractionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public InteractionActions @Interaction => new InteractionActions(this);
 
     // Menu
     private readonly InputActionMap m_Menu;
@@ -468,39 +472,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
-
-    // Dialogue
-    private readonly InputActionMap m_Dialogue;
-    private IDialogueActions m_DialogueActionsCallbackInterface;
-    private readonly InputAction m_Dialogue_Interact;
-    public struct DialogueActions
-    {
-        private @PlayerInputs m_Wrapper;
-        public DialogueActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Interact => m_Wrapper.m_Dialogue_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
-        public void SetCallbacks(IDialogueActions instance)
-        {
-            if (m_Wrapper.m_DialogueActionsCallbackInterface != null)
-            {
-                @Interact.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnInteract;
-            }
-            m_Wrapper.m_DialogueActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
-            }
-        }
-    }
-    public DialogueActions @Dialogue => new DialogueActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -549,18 +520,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPassTroughFloor(InputAction.CallbackContext context);
         void OnCrowVision(InputAction.CallbackContext context);
         void OnCrowFetch(InputAction.CallbackContext context);
     }
+    public interface IInteractionActions
+    {
+        void OnInteract(InputAction.CallbackContext context);
+    }
     public interface IMenuActions
     {
         void OnSelect(InputAction.CallbackContext context);
-    }
-    public interface IDialogueActions
-    {
-        void OnInteract(InputAction.CallbackContext context);
     }
 }

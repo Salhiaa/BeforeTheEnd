@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "79bc5339-cbac-4252-b726-89123c048e03",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "e5bb75f2-9df2-4504-a86f-b6b2a802ad36",
@@ -118,17 +109,6 @@
                 },
                 {
                     "name": "",
-                    "id": "25c07641-eea8-46e3-b831-d57b1a446d88",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "401065e4-0173-4587-8c75-d1f5fe464a4b",
                     "path": "<Mouse>/rightButton",
                     "interactions": "Tap",
@@ -146,6 +126,34 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "CrowFetch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interaction",
+            "id": "8044f974-2948-47e5-a091-b22e053363ff",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "8b56886a-75d3-4a2c-9b4c-8b447870e93f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2ade52da-ea4b-4e3b-82b0-320bedfd6d25",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -174,34 +182,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Dialogue",
-            "id": "8044f974-2948-47e5-a091-b22e053363ff",
-            "actions": [
-                {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "8b56886a-75d3-4a2c-9b4c-8b447870e93f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "2ade52da-ea4b-4e3b-82b0-320bedfd6d25",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

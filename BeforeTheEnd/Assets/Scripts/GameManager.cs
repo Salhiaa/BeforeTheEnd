@@ -15,27 +15,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Vector3 spawnPoint = new Vector3(-8, -3.2f, 0);
-
-    //UI
+    // Overlay
+    [Header("Overlay")]
     public SpriteRenderer ItemIcon;
     public SpriteRenderer ItemIcon2;
     public GameObject Darkness;
     public string item = "";
     public string item2 = "";
 
-    //Pouvoirs disponibles
+    // Overlay
+    [Header("Player spawn point")]
+    public Vector3 spawnPoint = new Vector3(-8, -3.2f, 0);
+
+    // Pouvoirs disponibles
     [Header("Crow Powers")]
     public bool canUseVision;
-    public bool canSearchObject;
+    public bool canFetchObject;
     public bool canTalk;
 
-    //Gestion de la lumiere dans l'entree
+    // Variables de niveau
     [Header("Level : Entry")]
     public bool alreadyVisitedEntree;
     public bool torchPickedUp;
 
-    // Variables pour les items de la serre
     [Header("Level : Greenhouse")]
     public bool gotBottle;
     public bool gotSeeds;
@@ -44,7 +46,6 @@ public class GameManager : MonoBehaviour
     public bool gotKey;
     public bool usedKeyCage;
 
-    //Variables pour la salle de de danse
     [Header("Level : Dance Hall")]
     public bool talkedToWaitress;
     public bool gotHeart;

@@ -8,7 +8,6 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext context)
     {
-        //print(coll.name);
         if (context.started && canInteract)
         {
             coll.GetComponent<Interactable>().Interact();

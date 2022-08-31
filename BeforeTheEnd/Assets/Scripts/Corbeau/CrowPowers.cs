@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +10,7 @@ public class CrowPowers : MonoBehaviour
     //********* Vision *********//
     public void CrowVision(InputAction.CallbackContext context)
     {
-        if (context.started && GameManager.Instance.canUseVision == true)
+        if (context.started && GameManager.Instance.canUseVision)
         {
             ToggleVision();
             GameObject.Find("Player").GetComponent<SFXManager>().PlayCrow1();
@@ -20,7 +18,7 @@ public class CrowPowers : MonoBehaviour
         }
     }
 
-    private void ToggleVision()
+    public void ToggleVision()
     {
         if (lePiaf.isUsingVision)
         {
@@ -36,7 +34,7 @@ public class CrowPowers : MonoBehaviour
     //********* Fetch *********//
     public void CrowFetch(InputAction.CallbackContext context)
     {
-        if (context.started && GameManager.Instance.canUseVision == true)
+        if (context.started && GameManager.Instance.canFetchObject)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);

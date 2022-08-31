@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3301986242709645098}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 4, z: 0}
+  m_LocalPosition: {x: 8.1, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1264162377306911656}
@@ -338,14 +338,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635350a467493ae4c9d876fa61b52372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: -8, y: -3.2, z: 0}
   ItemIcon: {fileID: 2375994962273492950}
   ItemIcon2: {fileID: 3718096806166692943}
   Darkness: {fileID: 2109080124873987536}
   item: 
   item2: 
+  spawnPoint: {x: -8, y: -3.2, z: 0}
   canUseVision: 0
-  canSearchObject: 0
+  canFetchObject: 0
   canTalk: 0
   alreadyVisitedEntree: 0
   torchPickedUp: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   plantGrew: 0
   gotKey: 0
   usedKeyCage: 0
-  TroncPlante: {fileID: 0}
+  talkedToWaitress: 0
   gotHeart: 0
   dancerAwakened: 0
 --- !u!1 &8119823540466675073
@@ -383,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8119823540466675073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.74, y: 4, z: 0}
+  m_LocalPosition: {x: 6.17, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1264162377306911656}

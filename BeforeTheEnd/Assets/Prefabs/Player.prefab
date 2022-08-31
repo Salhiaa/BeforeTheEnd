@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lePiaf: {fileID: 5090469069572932523}
-  toggleableObjects: []
+  toggleableObjects: {fileID: 0}
   mainCamera: {fileID: 0}
 --- !u!1 &4745907690213364750
 GameObject:
@@ -1693,22 +1693,6 @@ MonoBehaviour:
     m_ActionName: Player/PassTroughFloor[/Keyboard/w]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 197767335281485115}
-        m_TargetAssemblyTypeName: PlayerInteractionHandler, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 79bc5339-cbac-4252-b726-89123c048e03
-    m_ActionName: Player/Interact[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 2070938204710294440}
         m_TargetAssemblyTypeName: CrowPowers, Assembly-CSharp
         m_MethodName: CrowVision
@@ -1739,6 +1723,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 44d6b1ca-ad1f-41c5-8e85-d70007de5e74
     m_ActionName: Player/CrowReach[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca8a1a5f-3b04-4dcc-a07a-d4c97aa148e1
+    m_ActionName: Menu/Select[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 197767335281485115}
+        m_TargetAssemblyTypeName: PlayerInteractionHandler, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8b56886a-75d3-4a2c-9b4c-8b447870e93f
+    m_ActionName: Dialogue/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -1793,15 +1797,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fa8dc65ee8b014eb77e4d3595736cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 4745907690213364744}
-  animPlayer: {fileID: 1390945777}
+  inverted: 0
   moveSpeed: 3
   jumpForce: 6.6
-  groundPoint: {fileID: 4745907689963208350}
+  srPlayer: {fileID: 4745907690213364747}
+  groundCollision: {fileID: 4745907689963208350}
   ground:
     serializedVersion: 2
     m_Bits: 64
-  srPlayer: {fileID: 4745907690213364747}
 --- !u!114 &8998939329305758955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,6 +1862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f303c7c915ce5654297c6d44ea457272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
 --- !u!1 &5394677105282122243
 GameObject:
   m_ObjectHideFlags: 0

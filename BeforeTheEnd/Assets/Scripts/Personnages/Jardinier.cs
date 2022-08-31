@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class Jardinier : Interactable
+public class Jardinier : Character
 {
-    
+    //[SerializeField] Monologue speechBox;
+    //protected uint linesIndex = 0;
+
+    [Header("First interaction")]
     [SerializeField] string[] firstInteraction;
-    [SerializeField] string[] whenFreed;
-    [SerializeField] Monologue speechBox;
-    public uint linesIndex = 0;
-    
     public Sprite itemSprite;
 
+    [Header("When key given")]
+    [SerializeField] string[] whenFreed;
     public Sprite GardenerFreed;
     public bool freed = false;
-
-    public GameObject CrowsEye;
+    //public GameObject PowerIndication;
 
     private void Awake()
     {
@@ -23,7 +23,8 @@ public class Jardinier : Interactable
 
     public override void Interact()
     {
-        //Si le joueur donne la clef
+        // --- Monologue : When key given --- //
+        // Beginning of interaction
         if (GameManager.Instance.item == "KeyCage")
         {
             GameManager.Instance.UseItem("KeyCage");
@@ -31,9 +32,9 @@ public class Jardinier : Interactable
             speechBox.Say(whenFreed[0], false);
             gameObject.GetComponent<SpriteRenderer>().sprite = GardenerFreed;
             freed = true;
-            linesIndex++;
-        }
-        //Apres que le joueur ait donne la clef
+            //linesIndex++;
+        } 
+        // During interaction
         else if (freed)
         {
             if (linesIndex <= whenFreed.Length - 1)
@@ -41,35 +42,48 @@ public class Jardinier : Interactable
                 speechBox.Say(whenFreed[linesIndex], false);
             }
 
-            else if (linesIndex == whenFreed.Length) //fin du texte
+            // When dialogue over
+            else if (linesIndex == whenFreed.Length) 
             {
-                speechBox.Say(whenFreed[0], true);
-                CrowsEye.SetActive(true);
-                GameManager.Instance.canUseVision = true;
+                EndDialogue(); // Give Movement back to player
+                speechBox.Say(whenFreed[0], true); // Hide textbox
+                PowerIndication.SetActive(true);
+                GameManager.Instance.canUseVision = true; // Grant power
             }
-            else //apres la fin du texte
+            // End interaction
+            else
             {
-                CrowsEye.SetActive(false);
+                PowerIndication.SetActive(false); // Hide power indication
+                //player.switchToMovement(); // Give movement back to player
             }
-            linesIndex++;
         }
-        //Sinon, premiere interaction
+
+        // --- Monologue : First Interaction --- //
         else
         {
+            // During interaction
             if (linesIndex <= firstInteraction.Length - 1)
             {
                 speechBox.Say(firstInteraction[linesIndex], false);
             }
-            else //fin du texte
+            // End interaction
+            else
             {
-                speechBox.Say(firstInteraction[0], true);
+                EndDialogue(); // Give Movement back to player
+                speechBox.Say(firstInteraction[0], true); // Hide textbox
+                // Give bottle
                 if (!GameManager.Instance.gotBottle)
                 {
                     GameManager.Instance.PickItem("EmptyBottle", itemSprite);
                     GameManager.Instance.gotBottle = true;
                 }
+                //player.switchToMovement(); // Give movement back to player
             }
-            linesIndex++;
         }
+
+        base.Interact();
+
+        // Increment index lines
+        //linesIndex++;
     }
 }
