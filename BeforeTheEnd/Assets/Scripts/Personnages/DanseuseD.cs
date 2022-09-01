@@ -5,9 +5,7 @@ using UnityEngine;
 public class DanseuseD : Character
 {
     [Header("Speech components")]
-    //[SerializeField] Monologue speechBox;
     [SerializeField] Dialogue dial;
-    //uint linesIndex;
 
     [Header("First Interaction")]
     [SerializeField] string BeforeAwakening;
@@ -16,12 +14,6 @@ public class DanseuseD : Character
     [SerializeField] Sprite awakened;
     [SerializeField] string[] Awakening;
     bool isAwake;
-
-    /*[Header("Power Info")]
-    public GameObject CrowsWings;
-
-    [Header("Player Movement")]
-    [SerializeField] PlayerMovement player;*/
 
     void Awake()
     {
@@ -32,46 +24,46 @@ public class DanseuseD : Character
     //---gestion du dialogue---
     public override void Interact()
     {
-        // --- Monologue : After awakening --- //
-        if (isAwake)
+        if (!GameManager.Instance.dancersSpeechOver)
         {
-            if (linesIndex <= Awakening.Length - 1)
+            // --- Monologue : After awakening --- //
+            if (isAwake)
             {
-                dial.Say(Awakening[linesIndex]);
-                //linesIndex++;
+                if (linesIndex <= Awakening.Length - 1)
+                {
+                    dial.Say(Awakening[linesIndex]);
+                }
+                else if (linesIndex == Awakening.Length) //fin de l'interaction
+                {
+                    //hide speechbox
+                    speechBox.Say("", true);
+                    //show power indication
+                    PowerIndication.SetActive(true);
+                    //grant power
+                    GameManager.Instance.canFetchObject = true;
+                }
+                else //hide power indication
+                {
+                    PowerIndication.SetActive(false);
+                    GameManager.Instance.dancersSpeechOver = true;
+                    EndDialogue();
+                }
             }
-            else if (linesIndex == Awakening.Length) //fin de l'interaction
+            // --- Monologue : First Interaction --- //
+            else
             {
-                //linesIndex++;
-                //hide speechbox
-                speechBox.Say("", true);
-                //show power indication
-                PowerIndication.SetActive(true);
-                //grant power
-                GameManager.Instance.canFetchObject = true;
+                if (linesIndex == 0)
+                {
+                    speechBox.Say(BeforeAwakening, false);
+                } else
+                {
+                    speechBox.Say("", true);
+                    EndDialogue();
+                }
             }
-            else //hide power indication
-            {
-                PowerIndication.SetActive(false);
-                EndDialogue();
-            }
-        }
-        // --- Monologue : First Interaction --- //
-        else
-        {
-            if (linesIndex == 0)
-            {
-                speechBox.Say(BeforeAwakening, false);
-                //linesIndex++;
-            } else
-            {
-                speechBox.Say("", true);
-                EndDialogue();
-            }
-            
-        }
 
-        base.Interact();
+            base.Interact();
+        }
     }
 
     public void WakeUp()

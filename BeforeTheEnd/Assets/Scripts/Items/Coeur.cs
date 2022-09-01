@@ -7,8 +7,10 @@ public class Coeur : Interactable
     public Sprite itemSprite;
     void Awake()
     {
-        if (GameManager.Instance.gotHeart)
+        if (GameManager.Instance.dancerAwakened)
             MoveHeart();
+        else if (GameManager.Instance.gotHeart)
+            gameObject.SetActive(false);
     }
 
     public override void Interact()

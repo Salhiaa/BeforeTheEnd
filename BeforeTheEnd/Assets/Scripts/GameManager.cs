@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public string item = "";
     public string item2 = "";
 
-    // Overlay
+    // Spawn Point
     [Header("Player spawn point")]
     public Vector3 spawnPoint = new Vector3(-8, -3.2f, 0);
 
@@ -45,11 +45,16 @@ public class GameManager : MonoBehaviour
     public bool plantGrew;
     public bool gotKey;
     public bool usedKeyCage;
+    //public bool gardenerSpeechOver;
 
     [Header("Level : Dance Hall")]
     public bool talkedToWaitress;
     public bool gotHeart;
     public bool dancerAwakened;
+    public bool dancersSpeechOver;
+
+    [Header("Level : Music Room")]
+    public bool gotLadderDown;
 
 
     private void Awake()

@@ -6,15 +6,10 @@ using UnityEngine.InputSystem;
 public class GroundCheckScript : MonoBehaviour
 {
     bool canPassThrough;
-    Collider2D coll;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.name == "SolVisibleSallePortes")
-        {
-            collision.isTrigger = true;
-        }
-        else*/ if (collision.CompareTag("PassPlatform"))
+        if (collision.CompareTag("PassPlatform"))
         {
             collision.isTrigger = false;
         }
@@ -31,11 +26,7 @@ public class GroundCheckScript : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         string collName = collision.name;
-        if (collName == "EscaliersVisiblesSallePortes")
-        {
-            collision.isTrigger = false;
-        }
-        else if (collision.CompareTag("PassPlatform") && collName != "SolVisibleSallePortes")
+        if (collision.CompareTag("PassPlatform") && collName != "SolVisibleSallePortes")
         {
             collision.isTrigger = true;
         }

@@ -9,14 +9,8 @@ public class DanseuseG : Character
     [SerializeField] SpriteRenderer srDanseuse;
 
     [Header("Monologue")]
-    //[SerializeField] Monologue speechBox;
     [SerializeField] string[] firstInteraction;
     [SerializeField] GameObject[] appearAfterSpeech;
-
-    //[Header("Player Movement")]
-    //[SerializeField] PlayerMovement player;
-
-    //uint linesIndex;
 
     private void Awake()
     {
@@ -27,21 +21,23 @@ public class DanseuseG : Character
     public override void Interact()
     {
         // --- Monologue : First Interaction --- //
-        if (linesIndex <= firstInteraction.Length - 1)
+        if (!GameManager.Instance.talkedToWaitress)
         {
-            speechBox.Say(firstInteraction[linesIndex], false);
+            if (linesIndex <= firstInteraction.Length - 1)
+            {
+                speechBox.Say(firstInteraction[linesIndex], false);
+            }
+            // End of interaction
+            else
+            {
+                Show();
+                GetComponent<Transform>().position = new Vector3(-3.04f, -0.02f, -2f);
+                speechBox.Say(firstInteraction[0], true);
+                GameManager.Instance.talkedToWaitress = true;
+                EndDialogue(); // Give Movement back to player
+            }
+            base.Interact();
         }
-        // End of interaction
-        else
-        {
-            Show();
-            GetComponent<Transform>().position = new Vector3(-3.04f, -0.02f, -2f);
-            speechBox.Say(firstInteraction[0], true);
-            GameManager.Instance.talkedToWaitress = true;
-            EndDialogue(); // Give Movement back to player
-        }
-
-        base.Interact();
     }
 
     private void Show()

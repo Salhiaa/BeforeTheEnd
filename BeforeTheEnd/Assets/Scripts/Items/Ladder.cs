@@ -8,7 +8,16 @@ public class Ladder : Interactable
     public bool slideDown;
     public GameObject ladder;
 
-    
+    private void Start()
+    {
+        if (GameManager.Instance.gotLadderDown)
+        {
+            ladder.transform.position = targetLocation;
+            ladder.GetComponent<EdgeCollider2D>().enabled = enabled;
+            Destroy(gameObject);
+        }
+    }
+
     void Update()
     {
         if (slideDown)
@@ -18,6 +27,7 @@ public class Ladder : Interactable
             {
                 ladder.GetComponent<EdgeCollider2D>().enabled = enabled;
                 Destroy(gameObject);
+                GameManager.Instance.gotLadderDown = true;
             }
         }
     }

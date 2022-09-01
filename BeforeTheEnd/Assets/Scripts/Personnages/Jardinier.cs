@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Jardinier : Character
 {
-    //[SerializeField] Monologue speechBox;
-    //protected uint linesIndex = 0;
 
     [Header("First interaction")]
     [SerializeField] string[] firstInteraction;
@@ -13,7 +11,6 @@ public class Jardinier : Character
     [SerializeField] string[] whenFreed;
     public Sprite GardenerFreed;
     public bool freed = false;
-    //public GameObject PowerIndication;
 
     private void Awake()
     {
@@ -32,7 +29,7 @@ public class Jardinier : Character
             speechBox.Say(whenFreed[0], false);
             gameObject.GetComponent<SpriteRenderer>().sprite = GardenerFreed;
             freed = true;
-            //linesIndex++;
+            base.Interact();
         } 
         // During interaction
         else if (freed)
@@ -55,10 +52,11 @@ public class Jardinier : Character
                 PowerIndication.SetActive(false); // Hide power indication
                 EndDialogue(); // Give Movement back to player
             }
+            base.Interact();
         }
 
         // --- Monologue : First Interaction --- //
-        else
+        else if (!GameManager.Instance.gotBottle)
         {
             // During interaction
             if (linesIndex <= firstInteraction.Length - 1)
@@ -77,8 +75,7 @@ public class Jardinier : Character
                     GameManager.Instance.gotBottle = true;
                 }
             }
+            base.Interact();
         }
-
-        base.Interact();
     }
 }
