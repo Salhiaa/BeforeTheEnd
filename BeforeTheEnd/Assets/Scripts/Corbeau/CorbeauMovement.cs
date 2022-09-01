@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class CorbeauMovement : MonoBehaviour
 {
@@ -9,16 +10,15 @@ public class CorbeauMovement : MonoBehaviour
 
     public PlayerMovement PlayerMvt;
 
-    public bool wantsToRest;
-    public bool isUsingVision, isAtCelling;
-    Vector3 visionPoint;
+    public bool wantsToRest, isFlying, isUsingFetch, isAtDestination;
+    public Vector3 targetLocation;
+    public Interactable objectToFetch;
 
     private Transform selfTransform;
     private Transform playerTransform;
 
     private void Awake()
     {
-        visionPoint = new Vector3 (0, 4.92f, 0);
         selfTransform = transform;
         playerTransform = PlayerMvt.transform;
     }
@@ -30,37 +30,59 @@ public class CorbeauMovement : MonoBehaviour
         {
             if (selfTransform.position == RestPos.position) // Quand est sur la tete, arrete de vouloir etre sur la tete
             {
-                isAtCelling = false;
+                // Reset booleans
+                isAtDestination = false;
                 wantsToRest = false;
                 animCrow.SetBool("isFlying", false);
+                isFlying = false;
+                if (isUsingFetch)
+                {
+                    isUsingFetch = false;
+                    if (objectToFetch)
+                    {
+                        objectToFetch = null;
+                    }
+                }
+                // Change player sprite for the one with the crow
                 PlayerMvt.switchAnimationLayer(true);
             }
             else
             {
-                isUsingVision = false;
-                selfTransform.position = Vector3.MoveTowards(selfTransform.position, RestPos.position, .15f);
+                selfTransform.position = Vector3.MoveTowards(selfTransform.position, RestPos.position, .12f);
                 FlipXIf(RestPos.position.x);
             }
         }
 
-        // Va au plafond
-        if (isUsingVision & !isAtCelling)
+        // Déplacement
+        else if (isFlying & !isAtDestination)
         {
-            if (selfTransform.position == visionPoint) // Quand est au plafond, arrete de vouloir allez au plafond
+            if (selfTransform.position == targetLocation) // S'arrête quand atteint sa cible
             {
-                isAtCelling = true;
+                isAtDestination = true;
                 selfTransform.SetParent(null);
+                if (isUsingFetch)
+                {
+                    StopFetch();
+                }
+                    
             } else
             {
-                selfTransform.position = Vector3.MoveTowards(selfTransform.position, visionPoint, .15f);
+                selfTransform.position = Vector3.MoveTowards(selfTransform.position, targetLocation, .12f);
                 animCrow.SetBool("isFlying", true);
                 PlayerMvt.switchAnimationLayer(false);
-                FlipXIf(visionPoint.x);
+                FlipXIf(targetLocation.x);
             }
         }
+    }
 
-        // Va chercher un objet
-
+    async void StopFetch()
+    {
+        if (objectToFetch)
+        {
+            objectToFetch.Interact();
+        }
+        await Task.Delay(750);
+        Rest();
     }
 
     public void Rest()
@@ -83,6 +105,5 @@ public class CorbeauMovement : MonoBehaviour
         {
             srOizo.flipX = true;
         }
-        
     }
 }

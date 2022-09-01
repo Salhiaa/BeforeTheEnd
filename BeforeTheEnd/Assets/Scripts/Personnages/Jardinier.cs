@@ -45,7 +45,6 @@ public class Jardinier : Character
             // When dialogue over
             else if (linesIndex == whenFreed.Length) 
             {
-                EndDialogue(); // Give Movement back to player
                 speechBox.Say(whenFreed[0], true); // Hide textbox
                 PowerIndication.SetActive(true);
                 GameManager.Instance.canUseVision = true; // Grant power
@@ -54,7 +53,7 @@ public class Jardinier : Character
             else
             {
                 PowerIndication.SetActive(false); // Hide power indication
-                //player.switchToMovement(); // Give movement back to player
+                EndDialogue(); // Give Movement back to player
             }
         }
 
@@ -77,13 +76,9 @@ public class Jardinier : Character
                     GameManager.Instance.PickItem("EmptyBottle", itemSprite);
                     GameManager.Instance.gotBottle = true;
                 }
-                //player.switchToMovement(); // Give movement back to player
             }
         }
 
         base.Interact();
-
-        // Increment index lines
-        //linesIndex++;
     }
 }

@@ -20,13 +20,14 @@ public class CrowPowers : MonoBehaviour
 
     public void ToggleVision()
     {
-        if (lePiaf.isUsingVision)
+        if (lePiaf.isFlying)
         {
             lePiaf.Rest();
             toggleableObjects.SetActive(false);
-        } else if (!lePiaf.wantsToRest)
+        } else if (!lePiaf.wantsToRest && !lePiaf.isFlying)
         {
-            lePiaf.isUsingVision = true;
+            lePiaf.isFlying = true;
+            lePiaf.targetLocation = new Vector3(0, 4.92f, 0);
             toggleableObjects.SetActive(true);
         }
     }
@@ -36,16 +37,26 @@ public class CrowPowers : MonoBehaviour
     {
         if (context.started && GameManager.Instance.canFetchObject)
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-
-            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
-            if (hit.collider != null)
+            if (!lePiaf.wantsToRest && !lePiaf.isFlying)
             {
-                Debug.Log(hit.collider.gameObject.name);
-                if (hit.collider.gameObject.tag == "CrowInteractable")
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+                lePiaf.isFlying = true;
+                lePiaf.isUsingFetch = true;
+                lePiaf.targetLocation = new Vector3(mousePos.x, mousePos.y, 0);
+
+                // Collider test
+                RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+                if (hit.collider != null)
                 {
-                    print("Hey, ça marche !");
+                    GameObject coll = hit.collider.gameObject;
+                    Debug.Log(coll.name);
+                    if (coll.tag == "CrowInteractable")
+                    {
+                        print("Crow Interactable");
+                        lePiaf.objectToFetch = coll.GetComponent<Interactable>();
+                    }
                 }
             }
         }
