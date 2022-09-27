@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,7 +41,7 @@ public class GameManager : MonoBehaviour
     public bool gotSeeds;
     public bool usedSeeds;
     public bool plantGrew;
-    public bool gotKey;
+    public bool gotKeyCage;
     public bool usedKeyCage;
     //public bool gardenerSpeechOver;
 
@@ -55,6 +53,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Level : Music Room")]
     public bool gotLadderDown;
+
+    [Header("Level : Shore")]
+    public bool gotShoreKey;
+    public bool gotBridgeKey;
 
 
     private void Awake()

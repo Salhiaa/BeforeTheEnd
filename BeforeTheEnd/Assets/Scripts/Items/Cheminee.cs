@@ -37,6 +37,7 @@ public class Cheminee : Interactable
     private void FireplaceLit()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = litSprite;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         GreenhouseDoor.isLocked = false;
     }
 }

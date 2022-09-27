@@ -7,34 +7,40 @@ public class Ladder : Interactable
     private Vector3 targetLocation = new Vector3(-3.7f, -2.24f, 0);
     public bool slideDown;
     public GameObject ladder;
+    private float speed = .10f;
 
     private void Start()
     {
         if (GameManager.Instance.gotLadderDown)
         {
             ladder.transform.position = targetLocation;
-            ladder.GetComponent<EdgeCollider2D>().enabled = enabled;
-            Destroy(gameObject);
+            EndMovement();
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (slideDown)
         {
-            ladder.transform.position = Vector3.MoveTowards(ladder.transform.position, targetLocation, .10f);
+            // ladder movement
+            ladder.transform.position = Vector3.MoveTowards(ladder.transform.position, targetLocation, speed);
             if (ladder.transform.position == targetLocation)
             {
-                ladder.GetComponent<EdgeCollider2D>().enabled = enabled;
-                Destroy(gameObject);
+                EndMovement();
                 GameManager.Instance.gotLadderDown = true;
             }
+            speed += .02f; // increases falling speed for a more natural effect
         }
     }
 
     public override void Interact()
     {
-        //print("Hey, jusque-là ça marche !");
         slideDown = true;
+    }
+
+    public void EndMovement()
+    {
+        ladder.GetComponent<EdgeCollider2D>().enabled = enabled; // enable collider for climbing the ladder
+        Destroy(gameObject);
     }
 }

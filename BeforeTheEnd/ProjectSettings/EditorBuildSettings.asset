@@ -26,5 +26,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SalleDanse.unity
     guid: d436eb3cba3587142af865063fa33f81
+  - enabled: 1
+    path: Assets/Scenes/Shore1.unity
+    guid: 4e797bbfdc6a67c49a1123f3bb3a75f3
+  - enabled: 1
+    path: Assets/Scenes/Shore2.unity
+    guid: d8dcdf67063a46d41a79c3279d629a78
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e5c41f5bda8be247a92ac4dab301157, type: 2}
