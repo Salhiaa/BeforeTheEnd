@@ -4,15 +4,16 @@ public class KeyBridge : Interactable
 {
     public Sprite itemSprite;
 
-    private void Awake()
+    /*private void Awake()
     {
         if (GameManager.Instance.gotShoreKey)
             Destroy(gameObject);
-    }
+    }*/
 
     public override void Interact()
     {
-        GameManager.Instance.PickItem("ShoreKey", itemSprite);
+        print("hey");
+        GameManager.Instance.PickItem("KeyBridge", itemSprite);
         GameManager.Instance.gotShoreKey = true;
         Destroy(gameObject);
     }

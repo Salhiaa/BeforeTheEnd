@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7717045741219719354}
   - component: {fileID: 7717045741219719353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7717045741799364003}
   - component: {fileID: 7717045741799364002}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BatoDevant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7717045742479735871}
   - component: {fileID: 7717045742479735870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BatoDerriere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

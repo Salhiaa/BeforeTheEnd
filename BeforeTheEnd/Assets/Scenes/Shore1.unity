@@ -330,6 +330,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1403261580}
   - component: {fileID: 1403261579}
+  - component: {fileID: 1403261581}
+  - component: {fileID: 1403261582}
   m_Layer: 0
   m_Name: KeyInSky
   m_TagString: CrowInteractable
@@ -402,6 +404,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.48}
+--- !u!114 &1403261581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403261578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc429b9e400f0a4ea92b942249c6658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: 65b1aa6a02ae1264b8b533a6f5bf340b, type: 3}
+--- !u!61 &1403261582
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403261578}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.78, y: 2.72}
+    newSize: {x: 2.78, y: 2.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.78, y: 2.72}
+  m_EdgeRadius: 0
 --- !u!1 &1413431402
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +454,7 @@ GameObject:
   - component: {fileID: 1413431405}
   - component: {fileID: 1413431404}
   - component: {fileID: 1413431403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: KeyInPlace
   m_TagString: CrowInteractable
   m_Icon: {fileID: 0}
@@ -701,9 +742,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1795323649}
   - component: {fileID: 1795323648}
+  - component: {fileID: 1795323650}
+  - component: {fileID: 1795323651}
   m_Layer: 0
   m_Name: InvisibleWall
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -748,6 +791,45 @@ Transform:
   m_Father: {fileID: 584083359}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1795323650
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795323647}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.5000185, y: -0.24674346}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.0000367, y: 0.50651306}
+  m_EdgeRadius: 0
+--- !u!114 &1795323651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795323647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9dc25a6a81a49448f59967fdab2868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Key: {fileID: 1413431402}
 --- !u!1001 &36814087673857404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -758,6 +840,14 @@ PrefabInstance:
     - target: {fileID: 36814087868246527, guid: c02fcd684dc80864abf0c350ad5ad1b8, type: 3}
       propertyPath: m_SortingOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 36814087894494238, guid: c02fcd684dc80864abf0c350ad5ad1b8, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 36814087894494238, guid: c02fcd684dc80864abf0c350ad5ad1b8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 36814088522466894, guid: c02fcd684dc80864abf0c350ad5ad1b8, type: 3}
       propertyPath: m_SortingOrder
@@ -930,6 +1020,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7717045741219719353, guid: 9d68464a83d8f764791046e15e17158c, type: 3}
+      propertyPath: m_Points.Array.data[3].x
+      value: 2.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7717045741219719353, guid: 9d68464a83d8f764791046e15e17158c, type: 3}
+      propertyPath: m_Points.Array.data[3].y
+      value: 3.76
+      objectReference: {fileID: 0}
     - target: {fileID: 7717045741219719354, guid: 9d68464a83d8f764791046e15e17158c, type: 3}
       propertyPath: m_RootOrder
       value: 5
